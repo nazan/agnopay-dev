@@ -1,0 +1,46 @@
+version: '2'
+services:
+  agnopay:
+    image: ${MY_REGISTRY}/phpapache-laravel6-node-xdebug
+    working_dir: /var/www/html
+    volumes:
+      - ./agnopay:/var/www/html
+      - ./agnopay-dc:/usr/src/aidock/build
+      - ./agnopay-dc/extra.ini:/usr/local/etc/php/conf.d/extra.ini
+      - ./agnopay-dc/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./agnopay-dc/.npm-appuser:/home/appuser/.npm
+      - ./agnopay-dc/.npm:/root/.npm
+      - ${HOME}/.composer:/home/appuser/.composer
+    env_file: ./agnopay-dc/.env
+    extra_hosts:
+      - "agnopay-database:192.168.37.7"
+    depends_on:
+      - agnopay-database
+    networks:
+      mydockernet:
+        ipv4_address: 192.168.37.17
+
+  agnopay-database:
+    image: mysql:5.7.23
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=main"
+      - "MYSQL_USER=user"
+      - "MYSQL_PASSWORD=password"
+      - "MYSQL_ROOT_PASSWORD=password"
+    networks:
+      mydockernet:
+        ipv4_address: 192.168.37.7
+
+volumes:
+  dbdata:
+
+networks:
+  mydockernet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.37.0/24
+          gateway: 192.168.37.1
