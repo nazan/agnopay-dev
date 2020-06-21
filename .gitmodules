@@ -1,0 +1,3 @@
+[submodule "agnopay"]
+	path = agnopay
+	url = git@github.com:nazan/agnopay.git
