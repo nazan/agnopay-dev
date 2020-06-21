@@ -30,7 +30,7 @@ RUN pecl install xdebug-2.6.0 && docker-php-ext-enable xdebug
 
 RUN a2enmod rewrite
 
-RUN mkdir -p /usr/src/aidock/build/log && touch /usr/src/aidock/build/log/php-error.log && chmod 777 /usr/src/aidock/build/log/php-error.log
+RUN mkdir -p /usr/src/aidock/build
 
 RUN if grep -q "^appuser" /etc/group; then echo "Group already exists."; else groupadd -g $GID appuser; fi
 RUN useradd -m -r -u $UID -g appuser appuser

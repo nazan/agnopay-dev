@@ -47,9 +47,8 @@ down:
 .PHONY: agnopay-touch
 agnopay-touch:
 	cp -n ./.env.example ./.env
-	
-	touch ./agnopay-dc/.env
-	mkdir -p ./agnopay-dc/.npm
-	mkdir -p ./agnopay-dc/.npm-appuser
+	cp -n ./agnopay-dc/.env.example ./agnopay-dc/.env
+
 	mkdir -p ./agnopay-dc/log
 	touch ./agnopay-dc/log/php-error.log
+	chmod 777 ./agnopay-dc/log/php-error.log
