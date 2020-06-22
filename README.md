@@ -19,4 +19,5 @@ Do the following to gain shell access to application container and run the unit 
 
     cd agnopay-dev
     make agnopay-bash
+    composer install
     ./vendor/bin/phpunit
