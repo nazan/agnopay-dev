@@ -1,15 +1,19 @@
-DOCKER_REGISTRY ?= dkrhub.alliedinsure.com.mv
-
 UID ?= 1000
 GID ?= 1000
 
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
+
+
+
 
 # Shell access to app container.
 
 .PHONY: agnopay-bash
 agnopay-bash:
 	docker-compose exec --user $(UID):$(GID) agnopay bash
+
+
+
 
 # Container preparation routines.
 
@@ -21,8 +25,6 @@ agnopay-prepare: agnopay-touch
 .PHONY: prepare-all
 prepare-all: agnopay-prepare
 	@echo "Post setup done for all application components."
-
-
 
 
 
@@ -39,14 +41,6 @@ down:
 
 
 
-# Build image.
-
-.PHONY: build
-build: agnopay-touch
-	docker-compose build agnopay
-
-
-
 
 # Create required directories and files in host machine.
 
@@ -58,3 +52,12 @@ agnopay-touch:
 	mkdir -p ./agnopay-dc/log
 	touch ./agnopay-dc/log/php-error.log
 	chmod 777 ./agnopay-dc/log/php-error.log
+
+
+
+
+# Build image.
+
+.PHONY: build
+build: agnopay-touch
+	docker-compose build agnopay
