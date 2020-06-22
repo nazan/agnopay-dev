@@ -15,6 +15,8 @@
     make build
     make up
 
+## Run unit tests
+
 Do the following to gain shell access to application container and run the unit tests.
 
     cd agnopay-dev
