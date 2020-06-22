@@ -39,6 +39,12 @@ down:
 
 
 
+# Build image.
+
+.PHONY: build
+build: agnopay-touch
+	docker-compose build agnopay
+
 
 
 
