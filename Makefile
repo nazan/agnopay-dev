@@ -27,6 +27,10 @@ prepare-all: agnopay-prepare
 	@echo "Post setup done for all application components."
 
 
+.PHONY: checkout-masters
+checkout-masters:
+	git -C ./agnopay checkout master
+
 
 
 # Bring up/down services.

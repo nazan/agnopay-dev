@@ -12,6 +12,7 @@
 
     git clone --recurse-submodules git@github.com:nazan/agnopay-dev.git
     cd agnopay-dev
+    make checkout-masters
     make build
     make up
 
